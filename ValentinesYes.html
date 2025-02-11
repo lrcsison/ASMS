@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day|Alyana Skyler M. Sabs</title>
+
+    <!-- packages -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
+      <!--text Font-->
+      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+      <style>
+
+            body {
+                  text-align: center;
+                  font-family: 'Dancing Script', cursive;
+                  background: url("https://www.shutterstock.com/image-vector/watercolor-style-simple-adult-cute-600nw-2280836329.jpg");
+                  background-size: cover;
+                  overflow: hidden;
+                  margin: 0;
+                  height: 100vh;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-direction: column;
+                  position: relative;
+                  }
+
+            h1 {
+                  font-size: 56px;
+                  color: #d63384;
+                  position: relative;
+                  z-index: 2;
+                  font-weight: bold;
+                  
+            }
+
+            .target {
+            width: 100px; 
+            height: 50px;
+            background-image: url('Carnation.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            cursor: pointer;
+            }
+
+
+            .target:hover {
+                  transform: scale(1.5);
+            }
+
+            #cat-image {
+                  display: none;
+                  position: fixed;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  width: 50%;
+                  max-width: 700px;
+                  height: auto;
+                  z-index: 3;
+            }
+
+      </style>
+</head>
+<body>
+
+<h1 id="game-text">Catch the Carnation Flowers, My Love😊</h1>
+
+
+<img id="cat-image" src="Cat.png" alt="Cat">
+
+<script>
+      const totalTargets = 14;
+      let targetsLeft = totalTargets;
+      let gameStarted = false;
+
+      function createTarget(x, y) {
+            let target = document.createElement("div");
+            target.classList.add("target");
+            target.style.left = `${x}px`;
+            target.style.top = `${y}px`;
+
+            target.addEventListener("click", function () {
+            target.remove();
+            
+            if (!gameStarted) {
+                  gameStarted = true;
+                  spawnRemainingTargets();
+            } else {
+                  targetsLeft--;
+                  if (targetsLeft === 0) {
+                        document.getElementById("cat-image").style.display = "block";
+                  }
+            }
+            });
+
+            document.body.appendChild(target);
+      }
+
+      function spawnFirstTarget() {
+            let textElement = document.getElementById("game-text");
+            let textRect = textElement.getBoundingClientRect();
+
+            let firstX = textRect.left + textRect.width / 2 - 25;
+            let firstY = textRect.top - 70; 
+
+            createTarget(firstX, firstY);
+      }
+
+      function spawnRemainingTargets() {
+            for (let i = 0; i < totalTargets; i++) {
+            let x = Math.random() * (window.innerWidth - 60);
+            let y = Math.random() * (window.innerHeight - 60) + 50;
+            createTarget(x, y);
+            }
+      }
+
+      spawnFirstTarget();
+
+      function checkWinCondition() {
+    if (targetsLeft === 0) {
+        document.getElementById("cat-image").style.display = "block"; //show txt
+        document.getElementById("game-text").style.display = "none"; //hide txt
+    }
+}
+
+      function createTarget(x, y) {
+      let target = document.createElement("div");
+      target.classList.add("target");
+      target.style.left = `${x}px`;
+      target.style.top = `${y}px`;
+
+      target.addEventListener("click", function () {
+            target.remove();
+            
+            if (!gameStarted) {
+                  gameStarted = true;
+                  spawnRemainingTargets();
+            } else {
+                  targetsLeft--;
+                  checkWinCondition(); // Checks if all targets are caught
+            }
+      });
+
+      document.body.appendChild(target);
+      }
+
+</script>
+
+</body>
+</html>

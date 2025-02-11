@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day|Invite</title>
+
+    <!-- packages -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
+    <!--Text font-->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://png.pngtree.com/background/20220714/original/pngtree-cute-simple-valentines-day-heart-background-wallpaper-picture-image_1606645.jpg");
+            text-align: center;
+            padding: 70px;
+            background-size: cover;
+            
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .card {
+            background: white;
+            padding: 55px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            max-width: 400px;
+            animation: float 3s ease-in-out infinite;
+            margin-top: 4%;
+        }
+        h1 {
+            color: #ff4d6d;
+            
+        }
+        p {
+            color: #555;
+            font-size: 18px;
+        }
+        .heart {
+            color: red;
+            font-size: 24px;
+        }
+        .btn {
+            background: #ff4d6d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 15px;
+            background-repeat: no-repeat;
+        }
+        .btn:hover {
+            background: #e63950;
+        }
+
+        .no-btn {
+            background: #555;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="card" id="invite-card">
+        <h1 id="invite-text">You're Invited! <span class="heart">❤</span></h1>
+        <p>Hello, Alyana Skyler M. Sabs! I want you to be my Valentine&#129392;!!!</p>
+        <p><strong>Date:</strong> February 15, 2025</p>
+        <p><strong>Time:</strong> 3:00 pm - Onwards</p>
+        <p><strong>Location:</strong> SM Mall of Asia</p>
+        <p style="font-weight: 700; font-size: 35px; color: #ff4d6d; font-family: 'Dancing Script', cursive;">Will you attend?</p>
+        <a href="ValentinesYes.html" class="btn" id="yes-link">Yes</a>
+        <button class="btn no-btn" id="no-button" onclick="showNext()">No</button>
+    </div>
+
+    <div class="card hidden" id="image-container">
+        <h1 id="message-text"></h1>
+        <img id="reaction-image" src="" alt="Reaction Image" width="300">
+        <br>
+        <button class="btn no-btn" id="no-button-next" onclick="showNext()">No</button>
+        <a href="ValentinesYes.html" class="btn" id="yes-link">Fine, I'll go.</a>
+    </div>
+
+    <script>
+        const messages = [
+            "I don't take no for an Answer",
+            "What do you mean no?",
+            "But it's going to be amazing!",
+            "Please reconsider! 😢",
+            "You’re breaking my heart 💔",
+            "Are you sure? 🥺",
+            "So you'll go then? 😍",
+            "But you said you're not sure? 🥹",
+            "Okay, I'll wait... 😔"
+        ];
+    
+        const images = [
+            "https://media1.giphy.com/media/VRyiBxgvy9H3y/giphy.gif?cid=6c09b952w36c75m7cky61ggdc8lpxeax2yr18gmhd5ov8h0h&ep=v1_gifs_search&rid=giphy.gif&ct=g",  
+            "https://i.pinimg.com/736x/04/71/d9/0471d9c5b21a2d929a080ad0b5a5b669.jpg",
+            "https://i.pinimg.com/originals/70/6b/ba/706bba1e5ac0b2d257044f8e6298c066.gif",
+            "https://thumb.ac-illust.com/d7/d7bad7a820719234330c034c3a67692c_t.jpeg",
+            "https://i.pinimg.com/originals/05/3d/86/053d869718e02221b2950e6633f6f789.gif",
+            "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c2047868-eb3f-45a9-84ac-a12510bfedd9/dfa127y-4efe5530-a87a-49d2-a296-7ff1f9d1242e.png/v1/fill/w_1131,h_707/puss_cat_face__by_dracoawesomeness_dfa127y-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODAwIiwicGF0aCI6IlwvZlwvYzIwNDc4NjgtZWIzZi00NWE5LTg0YWMtYTEyNTEwYmZlZGQ5XC9kZmExMjd5LTRlZmU1NTMwLWE4N2EtNDlkMi1hMjk2LTdmZjFmOWQxMjQyZS5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.2iHJ4sfNtBtEDjL4XJpXzwMmfhX6CqLIta9Y8umqGKs", 
+            "https://i.pinimg.com/originals/30/73/1d/30731df1cdd458e17e2146a90d7c6b7c.gif",
+            "https://i.redd.it/6rz0o5zvklc71.png",
+            "https://upload.wikimedia.org/wikipedia/commons/4/47/Faithful_Dog_Hachiko_Photo.png"
+        ];
+    
+        let index = 0;
+    
+        function showNext() {
+
+            document.getElementById("invite-card").classList.add("hidden");
+            document.getElementById("image-container").classList.remove("hidden");
+    
+            document.getElementById("message-text").innerText = messages[index];
+            document.getElementById("reaction-image").src = images[index];
+    
+            let noButton = document.getElementById("no-button-next");
+    
+        
+            if (index === 8) { 
+                noButton.style.display = "none";
+            } else if (index === messages.length - 1) {
+                noButton.style.display = "none";
+            } else {
+                noButton.style.display = "inline-block";
+            }
+            
+            index = (index + 1) % messages.length;
+        }
+    
+    </script>
+</body>
+
+</html>
